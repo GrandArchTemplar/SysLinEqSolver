@@ -1,2 +1,2 @@
 # SysLinEqSolver
-Solver of linear system of equals
+Solver of system of linear equations
