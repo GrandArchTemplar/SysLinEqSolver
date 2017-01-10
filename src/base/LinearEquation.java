@@ -8,11 +8,12 @@ import java.util.stream.Collectors;
 
 import static util.Utils.zip;
 
+@NotNull
 public class LinearEquation {
     private final List<Double> leftSide;
     private final Double rightSide;
 
-    public LinearEquation(List<Double> leftSide, Double rightSide) {
+    public LinearEquation(@NotNull List<Double> leftSide, @NotNull Double rightSide) {
         this.leftSide = leftSide.stream().collect(Collectors.toList());
         this.rightSide = rightSide;
     }
@@ -27,21 +28,24 @@ public class LinearEquation {
                 left.rightSide - right.rightSide);
     }
 
-    @NotNull
-    public static LinearEquation multiply(@NotNull LinearEquation linearEquation, Double coefficient) {
+    @Contract("!null, !null -> !null")
+    public static LinearEquation multiply(LinearEquation linearEquation, Double coefficient) {
         return new LinearEquation(
                 linearEquation.leftSide.stream().map((a) -> a * coefficient).collect(Collectors.toList()),
                 linearEquation.rightSide * coefficient);
     }
 
-    public boolean isZero(){
+    @NotNull
+    public Boolean isZero() {
         return !leftSide.stream().allMatch((a) -> a == 0);
     }
 
+    @NotNull
     public Double getRightSide() {
         return rightSide;
     }
 
+    @NotNull
     public List<Double> getLeftSide() {
         return leftSide.stream().collect(Collectors.toList());
     }
